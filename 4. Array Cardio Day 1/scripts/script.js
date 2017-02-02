@@ -34,10 +34,18 @@ const people = ['Beck, Glenn', 'Becker, Carl', 'Beckett, Samuel', 'Beddoes, Mick
     const totalYear = inventors.reduce(function(total, inventor){
       return total + (inventor.passed - inventor.year);
     }, 0);
-    console.log(totalYear);
+    // console.log(totalYear);
     // 5. Sort the inventors by years lived
+
+    const yearsLived = inventors.sort( (a, b) => ((a.passed - a.year) > (b.passed - b.year) ? 1 : -1) );
+    // console.table(yearsLived);
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    var category = document.querySelector('.mw-category');
+    var links = Array.from(category.querySelectorAll('a'));
+
+    var de = links.map( link => link.textContent).filter( streetName => streetName.includes('de'));
+    console.log(de);
     // 7. sort Exercise
     // Sort the people alphabetically by last name
     // 8. Reduce Exercise
