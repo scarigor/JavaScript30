@@ -1,0 +1,38 @@
+:root {
+  --base: yellow;
+  --spacing: 10px;
+  --blur: 10px;
+}
+
+img {
+  padding: var(--spacing);
+  background: var(--base);
+  filter: blur(var(--blur));
+}
+
+.h1 {
+  color: var(--base);
+}
+
+body {
+  background: url(images/background.jpg);
+  -webkit-background-size: cover;
+  background-size: cover;
+  text-align: center;
+  color: white;
+  font-family: 'helvetica neue', sans-serif;
+  font-weight: 100;
+  font-size: 30px;
+}
+
+.heading {
+  margin-bottom: 10px;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+.main-img {
+  border: 1px solid rgba(0,0,0,0.5);
+}
