@@ -1,23 +1,12 @@
-const secondHand = document.querySelector('.sec-hand');
-const minHand = document.querySelector('.min-hand');
-const hourHand = document.querySelector('.hour-hand');
-function setDate() {
-	const now = new Date();
+const panels = document.querySelectorAll('.panel');
 
-	const sec = now.getSeconds();
-	const secDegrees = ((sec / 60) * 360) + 90;
-	secondHand.style.transform = `rotate(${secDegrees}deg)`;
-
-	const min = now.getMinutes();
-	const minDegrees = ((min / 60) * 360) + 90;
-	minHand.style.transform = `rotate(${minDegrees}deg)`;
-
-	const hour = now.getMinutes();
-	const hourDegrees = ((hour / 12) * 360) + 90;
-	hourHand.style.transform = `rotate(${hourDegrees}deg)`;
+function toggleOpen() {
+	this.classList.toggle('open');
 }
 
+function toggleActive(e) {
+	e.propertyName.includes('flex') ? this.classList.toggle('open-active') : false;
+}
 
-setInterval(setDate, 1000);
-
-setDate();
+panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
