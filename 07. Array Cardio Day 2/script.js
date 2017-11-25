@@ -1,22 +1,37 @@
-const triggers = document.querySelectorAll('a');
-const highlight = document.createElement('span');
 
-highlight.classList.add('highlight');
-document.body.append(highlight);
+    const people = [
+      { name: 'Wes', year: 1988 },
+      { name: 'Kait', year: 1986 },
+      { name: 'Irv', year: 1970 },
+      { name: 'Lux', year: 2015 }
+    ];
 
-function highlightLink() {
-    const linkCoords = this.getBoundingClientRect();
+    const comments = [
+      { text: 'Love this!', id: 523423 },
+      { text: 'Super good', id: 823423 },
+      { text: 'You are the best', id: 2039842 },
+      { text: 'Ramen is my fav food ever', id: 123523 },
+      { text: 'Nice Nice Nice!', id: 542328 }
+    ];
 
-    const coords = {
-        width: linkCoords.width,
-        height: linkCoords.height,
-        top: linkCoords.top + window.scrollY,
-        left: linkCoords.left + window.scrollX
-    }
+    // Some and Every Checks
+    // Array.prototype.some() // is at least one person 19 or older?
+    
+const isOneAdult = people.some(person => ((new Date()).getFullYear()) - person.year >= 19);
+    // Array.prototype.every() // is everyone 19 or older?
+const isAllAdult = people.every(person => ((new Date()).getFullYear()) - person.year >= 19);
 
-    highlight.style.width = `${coords.width}px`;
-    highlight.style.height = `${coords.height}px`;
-    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
-}
+    // Array.prototype.find()
+    // Find is like filter, but instead returns just the one you are looking for
+    // find the comment with the ID of 823423
 
-triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+const comment = comments.find( comment => comment.id === 823423);
+console.log(comment); 
+    // Array.prototype.findIndex()
+    // Find the comment with this ID
+    // delete the comment with the ID of 823423
+
+const indexToRemove = comments.findIndex( comment => comment.id === 823423);
+
+comments.splice(indexToRemove, 1);
+console.table(comments);

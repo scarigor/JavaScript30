@@ -1,22 +1,22 @@
-const triggers = document.querySelectorAll('a');
-const highlight = document.createElement('span');
+ const hero = document.querySelector('.hero');
+  const text = hero.querySelector('h1');
+  const walk = 100; //px
 
-highlight.classList.add('highlight');
-document.body.append(highlight);
+  function shadow(e) {
+    const height = hero.offsetHeight;
+    const width = hero.offsetWidth;
+    let x = e.offsetX;
+    let y = e.offsetY;
 
-function highlightLink() {
-    const linkCoords = this.getBoundingClientRect();
-
-    const coords = {
-        width: linkCoords.width,
-        height: linkCoords.height,
-        top: linkCoords.top + window.scrollY,
-        left: linkCoords.left + window.scrollX
+    if (this !== e.target) {
+      x = x + e.target.offSetLeft;
+      y = y + e.target.offSetTop;
     }
 
-    highlight.style.width = `${coords.width}px`;
-    highlight.style.height = `${coords.height}px`;
-    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
-}
+    const xWalk = Math.round((x / width * walk) - (walk / 2));
+    const yWalk = Math.round((y / height * walk) - (walk / 2));
 
-triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+    text.style.textShadow = `${xWalk}px ${yWalk}px 0 red`;
+  }
+
+  hero.addEventListener('mousemove', shadow);

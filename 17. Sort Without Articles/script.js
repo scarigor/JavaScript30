@@ -1,22 +1,10 @@
-const triggers = document.querySelectorAll('a');
-const highlight = document.createElement('span');
+const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+  
+  function strip(bandName) {
+    return bandName.replace(/^(a |the |an) /i, '').trim();
+  }
 
-highlight.classList.add('highlight');
-document.body.append(highlight);
+  const sorted = bands.sort((a, b ) => strip(a) > strip(b) ? 1 : -1);
 
-function highlightLink() {
-    const linkCoords = this.getBoundingClientRect();
-
-    const coords = {
-        width: linkCoords.width,
-        height: linkCoords.height,
-        top: linkCoords.top + window.scrollY,
-        left: linkCoords.left + window.scrollX
-    }
-
-    highlight.style.width = `${coords.width}px`;
-    highlight.style.height = `${coords.height}px`;
-    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
-}
-
-triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+  document.querySelector('#bands').innerHTML = sorted.map( band => `<li>${band}</li>`).join('');
+  console.log(sorted);

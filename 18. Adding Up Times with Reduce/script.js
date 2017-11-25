@@ -1,22 +1,23 @@
-const triggers = document.querySelectorAll('a');
-const highlight = document.createElement('span');
+    const timeNodes = Array.from(document.querySelectorAll('[data-time]'));
 
-highlight.classList.add('highlight');
-document.body.append(highlight);
+    const seconds = timeNodes.map(timeNode => timeNode.dataset.time);
 
-function highlightLink() {
-    const linkCoords = this.getBoundingClientRect();
 
-    const coords = {
-        width: linkCoords.width,
-        height: linkCoords.height,
-        top: linkCoords.top + window.scrollY,
-        left: linkCoords.left + window.scrollX
-    }
 
-    highlight.style.width = `${coords.width}px`;
-    highlight.style.height = `${coords.height}px`;
-    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
-}
+    newSeconds = seconds.map(timeCode => {
+            const [mins, secs] = timeCode.split(':').map(parseFloat);
+            return (mins * 60) + secs;
+        });
+    newSeconds2 = newSeconds.reduce((total, vidSeconds) => total + vidSeconds);
 
-triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+    let secondsLeft = newSeconds2;
+
+    const hours = Math.floor(secondsLeft / 3600);
+    console.log("Hours: " + hours);
+    secondsLeft = secondsLeft % 3600;
+    
+    const minutes = Math.floor(secondsLeft / 60);
+    console.log("Minutes: " + minutes);
+
+    secondsLeft = secondsLeft % 60;
+    console.log("Seconds: " + secondsLeft);

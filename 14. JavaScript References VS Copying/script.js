@@ -1,36 +1,36 @@
-function debounce(func, wait = 20, immediate = true) {
-  var timeout;
-  return function() {
-    var context = this, args = arguments;
-    var later = function() {
-      timeout = null;
-      if (!immediate) func.apply(context, args);
+    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    const team = players;
+    console.log(players, team);
+    team[3] = 'Lux';
+
+    const team2 = players.slice();
+
+    const team3 = [].concat(players);
+
+    const team4 = [...players];
+    team4[3] = 'YEAHSADA';
+    console.log(team4);
+
+    const team4 = Array.from(players);
+
+
+    const person = {
+        name: 'Wes Bos',
+        age: 80
     };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-}
 
-const sliderImages = document.querySelectorAll('.slide-in');
+    const captain = person;
+    captain.number = 90;
 
-function checkSlide(e) {
-  sliderImages.forEach(sliderImage => {
-    const slideInAt = (window.scrollY + window.innerHeight) - sliderImage.height / 2;
+    // copy object
 
-    // bottom of the image
-    const imageBottom = sliderImage.offsetTop + sliderImage.height;
-    const isHalfDown  = slideInAt > sliderImage.offsetTop;
-    const isNotScrolledPast = window.scrollY < imageBottom;
+    const cap2 = Object.assign({}, person, { number: 99});
 
-    if (isHalfDown && isNotScrolledPast) {
-      sliderImage.classList.add('active');
-    } else {
-      sliderImage.classList.remove('active');
-    }
-  });
-}
-  
-window.addEventListener('scroll', debounce(checkSlide));
-
+    const wes = {
+        name: 'wes',
+        age: 100
+        social: {
+            twitter: '@wesbos',
+            facebook: 'wesbos.developer';
+        }
+    } 

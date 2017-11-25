@@ -18,16 +18,8 @@
     <li>9</li>
     <li>10</li>
 </div>
-<script>
-	const pressed = [];
-	const secretCode = 'scarigor';
-	window.addEventListener('keyup', (e) => {
-		pressed.push(e.key);
-		pressed.splice(-secretCode.length -1, pressed.length - secretCode.length);
-		if (pressed.join('').includes(secretCode)) {
-			console.log('DINDINIG IG');
-		}
-	});
+<script src="script.js">
+
 </script>
 </body>
 </html>

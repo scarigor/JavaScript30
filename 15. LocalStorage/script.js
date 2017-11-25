@@ -1,22 +1,28 @@
-const triggers = document.querySelectorAll('a');
-const highlight = document.createElement('span');
+      const addItems = document.querySelector('.add-items');
+      const itemsList = document.querySelector('.plates');
+      const items = [];
 
-highlight.classList.add('highlight');
-document.body.append(highlight);
+      function addItem(e) {
+        e.preventDefault();
+        const text = (this.querySelector('[name=item]')).value;
+        const item = {
+          text: text, 
+          done: false
+        }
+        items.push(item);
+        populateList(items, itemsList);
+        this.reset();
+      }
 
-function highlightLink() {
-    const linkCoords = this.getBoundingClientRect();
+      function populateList(plates = [], platesList) {
+        platesList.innerHTML = plates.map((plate, i) => {
+          return `
+          <li>
+          <input id="item${i}" type="checkbox" data-index="{i}" ${plate.done ? 'checked' : ''}/>
+            <label for="item${i}">${plate.text}</label>
+          </li>
+          `;
+        }).join('');
+      }
 
-    const coords = {
-        width: linkCoords.width,
-        height: linkCoords.height,
-        top: linkCoords.top + window.scrollY,
-        left: linkCoords.left + window.scrollX
-    }
-
-    highlight.style.width = `${coords.width}px`;
-    highlight.style.height = `${coords.height}px`;
-    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
-}
-
-triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
+      addItems.addEventListener('submit', addItem);

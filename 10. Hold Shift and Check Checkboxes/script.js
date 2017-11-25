@@ -1,22 +1,21 @@
-const triggers = document.querySelectorAll('a');
-const highlight = document.createElement('span');
+const checkboxes = document.querySelectorAll('.inbox input[type = "checkbox"]');
+    checkboxes.forEach(checkbox => checkbox.addEventListener('click', handleCheck));
+    
+    let     lastChecked;
 
-highlight.classList.add('highlight');
-document.body.append(highlight);
+    function handleCheck (e) {
+        let inBetween = false;
+        if (e.shiftKey && this.checked) {
+            checkboxes.forEach(checkbox =>{
+                
+                if (checkbox === this || checkbox === lastChecked) {
+                    inBetween = !inBetween;
+                }
 
-function highlightLink() {
-    const linkCoords = this.getBoundingClientRect();
-
-    const coords = {
-        width: linkCoords.width,
-        height: linkCoords.height,
-        top: linkCoords.top + window.scrollY,
-        left: linkCoords.left + window.scrollX
+                if (inBetween) {
+                    checkbox.checked = true;
+                }
+            });
+        }
+        lastChecked = this;
     }
-
-    highlight.style.width = `${coords.width}px`;
-    highlight.style.height = `${coords.height}px`;
-    highlight.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
-}
-
-triggers.forEach(a => a.addEventListener('mouseenter', highlightLink));
